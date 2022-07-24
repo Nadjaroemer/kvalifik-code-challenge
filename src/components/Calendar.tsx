@@ -1,13 +1,16 @@
 import { Box, Grid } from "@chakra-ui/react";
 import type { FC } from "react";
+import _ from "lodash";
 
 const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 type Props = {
   param?: string;
+  startDay: number;
+  numberOfDaysInMonth: number;
 };
 
-const Calendar: FC<Props> = () => {
+const Calendar: FC<Props> = (props) => {
   return (
     <Box
       w="500px"
@@ -19,9 +22,15 @@ const Calendar: FC<Props> = () => {
     >
       <Box>May 2022</Box>
       <Box display="grid" gridTemplateColumns="repeat(7, 1fr)">
-        {weekdays.map((weekday) => {
-          return <Box>{weekday}</Box>;
-        })}
+        <>
+          {weekdays.map((weekday) => {
+            return <Box key={weekday}>{weekday}</Box>;
+          })}
+          {_.times(props.numberOfDaysInMonth, (n) => {
+            const date = n + 1;
+            return <Box key={date}>{date}</Box>;
+          })}
+        </>
       </Box>
     </Box>
   );
