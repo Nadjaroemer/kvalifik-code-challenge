@@ -1,16 +1,33 @@
 import { Box, Grid } from "@chakra-ui/react";
 import type { FC } from "react";
-import _ from "lodash";
+
+export const getAllDaysInMonth = (year: number, month: number) => {
+  const date = new Date(year, month, 1);
+
+  const dates = [];
+
+  while (date.getMonth() === month) {
+    dates.push(new Date(date));
+    date.setDate(date.getDate() + 1);
+  }
+
+  return dates;
+};
 
 const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 type Props = {
   param?: string;
   startDay: number;
-  numberOfDaysInMonth: number;
 };
 
 const Calendar: FC<Props> = (props) => {
+  const currentDate = new Date();
+  const dates = getAllDaysInMonth(
+    currentDate.getFullYear(),
+    currentDate.getMonth()
+  );
+
   return (
     <Box
       w="500px"
@@ -21,17 +38,16 @@ const Calendar: FC<Props> = (props) => {
       mb="10"
     >
       <Box>May 2022</Box>
-      <Box display="grid" gridTemplateColumns="repeat(7, 1fr)">
+      <Grid gridTemplateColumns="repeat(7, 1fr)">
         <>
           {weekdays.map((weekday) => {
             return <Box key={weekday}>{weekday}</Box>;
           })}
-          {_.times(props.numberOfDaysInMonth, (n) => {
-            const date = n + 1;
-            return <Box key={date}>{date}</Box>;
+          {dates.map((date) => {
+            return <Box key={date.getDate()}>{date.getDate()}</Box>;
           })}
         </>
-      </Box>
+      </Grid>
     </Box>
   );
 };

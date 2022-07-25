@@ -7,7 +7,7 @@ function App() {
     <Box bg="#F4F4F4" w="100%" h="100vh" p="10">
       <Center>
         <Box>
-          <Calendar startDay={3} numberOfDaysInMonth={31} />
+          <Calendar startDay={3} />
           <Events />
         </Box>
       </Center>
