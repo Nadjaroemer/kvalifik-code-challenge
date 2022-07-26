@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Box, Grid } from "@chakra-ui/react";
 import type { FC } from "react";
 
@@ -14,6 +15,14 @@ export const getAllDaysInMonth = (year: number, month: number) => {
   return dates;
 };
 
+export const calculateFirstDateOffset = (date: Date) => {
+  const day = date.getDay();
+  if (day === 0) {
+    return 6;
+  }
+  return day - 1;
+};
+
 const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 type Props = {
@@ -27,6 +36,7 @@ const Calendar: FC<Props> = (props) => {
     currentDate.getFullYear(),
     currentDate.getMonth()
   );
+  const firstDateOffset = calculateFirstDateOffset(dates[0]);
 
   return (
     <Box
@@ -42,6 +52,9 @@ const Calendar: FC<Props> = (props) => {
         <>
           {weekdays.map((weekday) => {
             return <Box key={weekday}>{weekday}</Box>;
+          })}
+          {_.times(firstDateOffset, (num) => {
+            return <Box key={`offset-${num}`}></Box>;
           })}
           {dates.map((date) => {
             return <Box key={date.getDate()}>{date.getDate()}</Box>;

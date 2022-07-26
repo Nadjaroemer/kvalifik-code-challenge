@@ -1,4 +1,4 @@
-import { getAllDaysInMonth } from "./Calendar";
+import { calculateFirstDateOffset, getAllDaysInMonth } from "./Calendar";
 
 describe("Calendar", () => {
   it("getAllDaysInMonth", () => {
@@ -11,5 +11,13 @@ describe("Calendar", () => {
 
     const firstDate = result[0];
     expect(firstDate.getDay()).toEqual(5);
+  });
+
+  it("calculateFirstDateOffset", () => {
+    const firstResult = calculateFirstDateOffset(new Date(2022, 6, 20));
+    expect(firstResult).toBe(2);
+
+    const secondResult = calculateFirstDateOffset(new Date(2022, 6, 17));
+    expect(secondResult).toBe(6);
   });
 });
