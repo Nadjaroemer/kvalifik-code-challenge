@@ -1,25 +1,34 @@
-import { Box } from '@chakra-ui/react'
-import type { FC } from 'react'
+import { Box } from "@chakra-ui/react";
+import type { FC } from "react";
 
 type Props = {
-  param?: string
-}
+  param?: string;
+  events: string[];
+};
 
-const Events: FC<Props> = () => {
+const Events: FC<Props> = (props) => {
   return (
-    <Box 
-      w='500px'
-      bg='white'
-      h='80px'
-      borderRadius='13px'
-      boxShadow='0 0 99px 0px rgba(0, 0, 0, 0.04)'
-      display='flex'
-      justifyContent='center'
-      alignItems='center'
+    <Box
+      w="500px"
+      borderRadius="13px"
+      display="flex"
+      flexDirection="column"
+      gap={4}
     >
-      <p>Events</p>
+      {props.events.map((event, index) => {
+        return (
+          <Box
+            bg="white"
+            padding={4}
+            borderRadius={4}
+            key={`${index}-${event}`}
+          >
+            {event}
+          </Box>
+        );
+      })}
     </Box>
-  )
-}
+  );
+};
 
-export default Events
+export default Events;

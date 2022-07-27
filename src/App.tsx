@@ -4,11 +4,11 @@ import Events from "./components/Events";
 
 function App() {
   return (
-    <Box bg="#F4F4F4" w="100%" h="100vh" p="10">
+    <Box bg="#F4F4F4" w="100%" p="10">
       <Center>
         <Box>
           <Calendar startDay={3} />
-          <Events />
+          <Events events={["foo", "baa"]} />
         </Box>
       </Center>
     </Box>
