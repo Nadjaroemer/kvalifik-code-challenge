@@ -42,7 +42,6 @@ const Calendar: FC<Props> = (props) => {
     <Box
       w="500px"
       bg="white"
-      h="400px"
       borderRadius="13px"
       boxShadow="0 0 99px 0px rgba(0, 0, 0, 0.04)"
       mb="10"

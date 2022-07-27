@@ -3,7 +3,8 @@ import type { FC } from "react";
 
 type Props = {
   param?: string;
-  events: string[];
+  events?: string[];
+  addEvent: (event: string) => void;
 };
 
 const Events: FC<Props> = (props) => {
@@ -15,18 +16,29 @@ const Events: FC<Props> = (props) => {
       flexDirection="column"
       gap={4}
     >
-      {props.events.map((event, index) => {
-        return (
-          <Box
-            bg="white"
-            padding={4}
-            borderRadius={4}
-            key={`${index}-${event}`}
-          >
-            {event}
-          </Box>
-        );
-      })}
+      <Box bg="white" borderRadius={4}>
+        <button
+          onClick={() => {
+            props.addEvent("event");
+          }}
+        >
+          Add event
+        </button>
+      </Box>
+      {props.events
+        ? props.events.map((event, index) => {
+            return (
+              <Box
+                bg="white"
+                padding={4}
+                borderRadius={4}
+                key={`${index}-${event}`}
+              >
+                {event}
+              </Box>
+            );
+          })
+        : undefined}
     </Box>
   );
 };
