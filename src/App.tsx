@@ -11,7 +11,12 @@ function App() {
     <Box bg="#F4F4F4" w="100%" p="10">
       <Center>
         <Box>
-          <Calendar startDay={3} />
+          <Calendar
+            startDay={3}
+            selectDate={(date) => {
+              setSelectedDate(date);
+            }}
+          />
           <Events
             events={events[selectedDate]}
             addEvent={(event) => {

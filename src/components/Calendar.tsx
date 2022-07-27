@@ -28,6 +28,7 @@ const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 type Props = {
   param?: string;
   startDay: number;
+  selectDate: (date: string) => void;
 };
 
 const Calendar: FC<Props> = (props) => {
@@ -56,7 +57,16 @@ const Calendar: FC<Props> = (props) => {
             return <Box key={`offset-${num}`}></Box>;
           })}
           {dates.map((date) => {
-            return <Box key={date.getDate()}>{date.getDate()}</Box>;
+            return (
+              <Box
+                key={date.getDate()}
+                onClick={() => {
+                  props.selectDate(date.toDateString());
+                }}
+              >
+                {date.getDate()}
+              </Box>
+            );
           })}
         </>
       </Grid>
