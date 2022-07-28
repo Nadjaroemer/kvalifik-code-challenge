@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { Box, Grid } from "@chakra-ui/react";
-import type { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { startOfMonth } from "date-fns";
 
 export const getAllDaysInMonth = (year: number, month: number) => {
   const date = new Date(year, month, 1);
@@ -27,17 +28,25 @@ const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 type Props = {
   param?: string;
-  startDay: number;
   selectDate: (date: string) => void;
 };
 
 const Calendar: FC<Props> = (props) => {
-  const currentDate = new Date();
-  const dates = getAllDaysInMonth(
-    currentDate.getFullYear(),
-    currentDate.getMonth()
+  const [firstDateInMonth, setFirstDateInMonth] = useState(
+    startOfMonth(new Date())
   );
-  const firstDateOffset = calculateFirstDateOffset(dates[0]);
+  const [dates, setDates] = useState<Date[]>([]);
+  const [firstDateOffset, setFirstDateOffset] = useState(0);
+
+  useEffect(() => {
+    const newDates = getAllDaysInMonth(
+      firstDateInMonth.getFullYear(),
+      firstDateInMonth.getMonth()
+    );
+    setDates(newDates);
+    const newFirstDateOffset = calculateFirstDateOffset(newDates[0]);
+    setFirstDateOffset(newFirstDateOffset);
+  }, [firstDateInMonth]);
 
   return (
     <Box
@@ -47,7 +56,40 @@ const Calendar: FC<Props> = (props) => {
       boxShadow="0 0 99px 0px rgba(0, 0, 0, 0.04)"
       mb="10"
     >
-      <Box>May 2022</Box>
+      <Box display="flex" justifyContent="space-between">
+        <Box>{`${firstDateInMonth.toLocaleString("default", {
+          month: "long",
+        })} ${firstDateInMonth.getFullYear()}`}</Box>
+        <Box>
+          <button
+            onClick={() => {
+              setFirstDateInMonth(
+                new Date(
+                  firstDateInMonth.getFullYear(),
+                  firstDateInMonth.getMonth() - 1,
+                  firstDateInMonth.getDate()
+                )
+              );
+            }}
+          >
+            {"<"}
+          </button>
+          <button>Today</button>
+          <button
+            onClick={() => {
+              setFirstDateInMonth(
+                new Date(
+                  firstDateInMonth.getFullYear(),
+                  firstDateInMonth.getMonth() + 1,
+                  firstDateInMonth.getDate()
+                )
+              );
+            }}
+          >
+            {">"}
+          </button>
+        </Box>
+      </Box>
       <Grid gridTemplateColumns="repeat(7, 1fr)">
         <>
           {weekdays.map((weekday) => {

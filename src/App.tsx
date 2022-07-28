@@ -12,7 +12,6 @@ function App() {
       <Center>
         <Box>
           <Calendar
-            startDay={3}
             selectDate={(date) => {
               setSelectedDate(date);
             }}
