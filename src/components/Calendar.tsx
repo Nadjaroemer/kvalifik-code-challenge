@@ -75,7 +75,15 @@ const Calendar: FC<Props> = (props) => {
           >
             {"<"}
           </button>
-          <button>Today</button>
+          <button
+            onClick={() => {
+              const today = new Date();
+              setFirstDateInMonth(startOfMonth(today));
+              props.selectDate(today);
+            }}
+          >
+            Today
+          </button>
           <button
             onClick={() => {
               setFirstDateInMonth(
