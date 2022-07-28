@@ -18,6 +18,7 @@ function App() {
             }}
           />
           <Events
+            selectedDate={selectedDate}
             events={events[selectedDate.toDateString()]}
             addEvent={(event) => {
               const updatedEvents = { ...events };

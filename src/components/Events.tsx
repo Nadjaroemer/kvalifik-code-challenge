@@ -3,6 +3,7 @@ import type { FC } from "react";
 
 type Props = {
   param?: string;
+  selectedDate: Date;
   events?: string[];
   addEvent: (event: string) => void;
 };
@@ -16,13 +17,16 @@ const Events: FC<Props> = (props) => {
       flexDirection="column"
       gap={4}
     >
+      <h3>{`${props.selectedDate.toLocaleString("default", {
+        month: "long",
+      })} ${props.selectedDate.getDate()}`}</h3>
       <Box bg="white" borderRadius={4}>
         <button
           onClick={() => {
             props.addEvent("event");
           }}
         >
-          Add event
+          +
         </button>
       </Box>
       {props.events
