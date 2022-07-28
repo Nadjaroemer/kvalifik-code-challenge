@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import type { FC } from "react";
+import { FC, useState } from "react";
 
 type Props = {
   param?: string;
@@ -9,6 +9,7 @@ type Props = {
 };
 
 const Events: FC<Props> = (props) => {
+  const [inputValue, setInputValue] = useState("");
   return (
     <Box
       w="500px"
@@ -20,10 +21,22 @@ const Events: FC<Props> = (props) => {
       <h3>{`${props.selectedDate.toLocaleString("default", {
         month: "long",
       })} ${props.selectedDate.getDate()}`}</h3>
-      <Box bg="white" borderRadius={4}>
+      <Box
+        bg="white"
+        borderRadius={4}
+        display="flex"
+        justifyContent="space-between"
+      >
+        <input
+          value={inputValue}
+          onChange={(event) => {
+            setInputValue(event.target.value);
+          }}
+        />
         <button
           onClick={() => {
-            props.addEvent("event");
+            props.addEvent(inputValue);
+            setInputValue("");
           }}
         >
           +
