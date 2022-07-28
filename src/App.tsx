@@ -5,26 +5,30 @@ import Events from "./components/Events";
 
 function App() {
   const [events, setEvents] = useState<Record<string, string[]>>({});
-  const [selectedDate, setSelectedDate] = useState(new Date().toDateString());
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
     <Box bg="#F4F4F4" w="100%" p="10">
       <Center>
         <Box>
           <Calendar
+            selectedDate={selectedDate}
             selectDate={(date) => {
               setSelectedDate(date);
             }}
           />
           <Events
-            events={events[selectedDate]}
+            events={events[selectedDate.toDateString()]}
             addEvent={(event) => {
               const updatedEvents = { ...events };
-              const previousEvents = updatedEvents[selectedDate];
+              const previousEvents = updatedEvents[selectedDate.toDateString()];
               if (previousEvents) {
-                updatedEvents[selectedDate] = [...previousEvents, event];
+                updatedEvents[selectedDate.toDateString()] = [
+                  ...previousEvents,
+                  event,
+                ];
               } else {
-                updatedEvents[selectedDate] = [event];
+                updatedEvents[selectedDate.toDateString()] = [event];
               }
               setEvents(updatedEvents);
             }}

@@ -28,7 +28,8 @@ const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 type Props = {
   param?: string;
-  selectDate: (date: string) => void;
+  selectedDate: Date;
+  selectDate: (date: Date) => void;
 };
 
 const Calendar: FC<Props> = (props) => {
@@ -103,8 +104,13 @@ const Calendar: FC<Props> = (props) => {
               <Box
                 key={date.getDate()}
                 onClick={() => {
-                  props.selectDate(date.toDateString());
+                  props.selectDate(date);
                 }}
+                backgroundColor={
+                  date.toDateString() === props.selectedDate.toDateString()
+                    ? "purple"
+                    : undefined
+                }
               >
                 {date.getDate()}
               </Box>
