@@ -1,7 +1,8 @@
 import _ from "lodash";
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Grid, Button } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { startOfMonth } from "date-fns";
+import { primaryPurple } from "../App";
 
 export const getAllDaysInMonth = (year: number, month: number) => {
   const date = new Date(year, month, 1);
@@ -51,8 +52,9 @@ const Calendar: FC<Props> = (props) => {
 
   return (
     <Box
-      w="500px"
+      p="8"
       bg="white"
+      w="500px"
       borderRadius="13px"
       boxShadow="0 0 99px 0px rgba(0, 0, 0, 0.04)"
       mb="10"
@@ -62,7 +64,11 @@ const Calendar: FC<Props> = (props) => {
           month: "long",
         })} ${firstDateInMonth.getFullYear()}`}</Box>
         <Box>
-          <button
+          <Button
+            size="xs"
+            borderRadius="50%"
+            backgroundColor={primaryPurple}
+            _hover={{ bg: "#000" }}
             onClick={() => {
               setFirstDateInMonth(
                 new Date(
@@ -73,9 +79,23 @@ const Calendar: FC<Props> = (props) => {
               );
             }}
           >
-            {"<"}
-          </button>
-          <button
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-24 w-24"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="white"
+              strokeWidth={4}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </Button>
+          <Button
+            variant="ghost"
             onClick={() => {
               const today = new Date();
               setFirstDateInMonth(startOfMonth(today));
@@ -83,8 +103,11 @@ const Calendar: FC<Props> = (props) => {
             }}
           >
             Today
-          </button>
-          <button
+          </Button>
+          <Button
+            size="xs"
+            borderRadius="50%"
+            backgroundColor={primaryPurple}
             onClick={() => {
               setFirstDateInMonth(
                 new Date(
@@ -95,17 +118,39 @@ const Calendar: FC<Props> = (props) => {
               );
             }}
           >
-            {">"}
-          </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-25 w-25"
+              fill="none"
+              viewBox="0 0 20 20"
+              stroke="white"
+              strokeWidth={4}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Button>
         </Box>
       </Box>
-      <Grid gridTemplateColumns="repeat(7, 1fr)">
+      <Grid
+        gridTemplateColumns="repeat(7, 1fr)"
+        h="250px"
+        w="440px"
+        justifyContent="center"
+      >
         <>
           {weekdays.map((weekday) => {
-            return <Box key={weekday}>{weekday}</Box>;
+            return (
+              <Box color="#d6d6d6" key={weekday}>
+                {weekday}
+              </Box>
+            );
           })}
           {_.times(firstDateOffset, (num) => {
-            return <Box key={`offset-${num}`}></Box>;
+            return <Box color="#707070" key={`offset-${num}`}></Box>;
           })}
           {dates.map((date) => {
             return (
@@ -116,11 +161,25 @@ const Calendar: FC<Props> = (props) => {
                 }}
                 backgroundColor={
                   date.toDateString() === props.selectedDate.toDateString()
-                    ? "purple"
+                    ? primaryPurple
                     : undefined
                 }
+                color={
+                  date.toDateString() === props.selectedDate.toDateString()
+                    ? "white"
+                    : "#707070"
+                }
+                display="flex"
+                alignItems="flex-end"
+                justifyContent="flex-end"
+                borderLeft="1px"
+                borderLeftColor="#d6d6d6"
+                borderTop="1px"
+                borderTopColor="#d6d6d6"
+                borderEnd="1px"
+                borderInlineEnd="none"
               >
-                {date.getDate()}
+                {date.getDate()}.
               </Box>
             );
           })}

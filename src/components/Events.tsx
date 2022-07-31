@@ -1,5 +1,6 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button, Input } from "@chakra-ui/react";
 import { FC, useState } from "react";
+import { primaryPurple } from "../App";
 
 type Props = {
   param?: string;
@@ -27,20 +28,39 @@ const Events: FC<Props> = (props) => {
         display="flex"
         justifyContent="space-between"
       >
-        <input
+        <Input
+          placeholder="Add new event"
+          variant="unstyled"
           value={inputValue}
           onChange={(event) => {
             setInputValue(event.target.value);
           }}
         />
-        <button
+        <Button
+          size="xs"
+          borderRadius="50%"
+          backgroundColor={primaryPurple}
+          variant="solid"
           onClick={() => {
             props.addEvent(inputValue);
             setInputValue("");
           }}
         >
-          +
-        </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="white"
+            strokeWidth={4}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
+        </Button>
       </Box>
       {props.events
         ? props.events.map((event, index) => {

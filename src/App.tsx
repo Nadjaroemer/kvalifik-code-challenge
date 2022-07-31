@@ -3,6 +3,8 @@ import { useState } from "react";
 import Calendar from "./components/Calendar";
 import Events from "./components/Events";
 
+export const primaryPurple = "#A170DB";
+
 function App() {
   const [events, setEvents] = useState<Record<string, string[]>>({});
   const [selectedDate, setSelectedDate] = useState(new Date());
