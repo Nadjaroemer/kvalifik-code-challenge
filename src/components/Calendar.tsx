@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Box, Grid, Button, IconButton, Heading } from "@chakra-ui/react";
+import { Box, Grid, Button, IconButton, Heading, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { startOfMonth } from "date-fns";
 import { primaryPurple, secondaryPurple } from "../App";
@@ -116,14 +116,17 @@ const Calendar: FC<Props> = (props) => {
           />
           <Button
             variant="ghost"
+            colorScheme="whiteAlpha"
+            _hover={{ bg: "#ededed" }}
             onClick={() => {
               const today = new Date();
               setFirstDateInMonth(startOfMonth(today));
               props.selectDate(today);
             }}
-            color={primaryPurple}
           >
-            Today
+            <Text color={primaryPurple} fontSize="xl" fontWeight="light">
+              Today
+            </Text>
           </Button>
           <IconButton
             size="xs"
