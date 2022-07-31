@@ -2,6 +2,8 @@ import { Box, Button, Input } from "@chakra-ui/react";
 import { FC, useState } from "react";
 import { primaryPurple } from "../App";
 
+const rowHeight = "74px";
+
 type Props = {
   param?: string;
   selectedDate: Date;
@@ -23,10 +25,13 @@ const Events: FC<Props> = (props) => {
         month: "long",
       })} ${props.selectedDate.getDate()}`}</h3>
       <Box
+        h={rowHeight}
+        p="16px"
         bg="white"
-        borderRadius={4}
+        borderRadius={12}
         display="flex"
         justifyContent="space-between"
+        alignItems="center"
       >
         <Input
           placeholder="Add new event"
@@ -66,9 +71,12 @@ const Events: FC<Props> = (props) => {
         ? props.events.map((event, index) => {
             return (
               <Box
+                h={rowHeight}
                 bg="white"
-                padding={4}
-                borderRadius={4}
+                padding="12px"
+                borderRadius={13}
+                display="flex"
+                alignItems="center"
                 key={`${index}-${event}`}
               >
                 {event}
