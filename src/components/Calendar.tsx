@@ -52,18 +52,28 @@ const Calendar: FC<Props> = (props) => {
 
   return (
     <Box
-      p="8"
       bg="white"
       w="500px"
       borderRadius="13px"
       boxShadow="0 0 99px 0px rgba(0, 0, 0, 0.04)"
       mb="10"
+      overflow="hidden"
     >
-      <Box display="flex" justifyContent="space-between">
-        <Box>{`${firstDateInMonth.toLocaleString("default", {
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        marginTop="12px"
+      >
+        <Box marginLeft="24px">{`${firstDateInMonth.toLocaleString("default", {
           month: "long",
         })} ${firstDateInMonth.getFullYear()}`}</Box>
-        <Box>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          marginRight="24px"
+        >
           <Button
             size="xs"
             borderRadius="50%"
@@ -101,6 +111,7 @@ const Calendar: FC<Props> = (props) => {
               setFirstDateInMonth(startOfMonth(today));
               props.selectDate(today);
             }}
+            color={primaryPurple}
           >
             Today
           </Button>
@@ -137,20 +148,33 @@ const Calendar: FC<Props> = (props) => {
       </Box>
       <Grid
         gridTemplateColumns="repeat(7, 1fr)"
-        h="250px"
-        w="440px"
+        h="360px"
+        w="100%"
         justifyContent="center"
+        gridGap="1px"
       >
         <>
           {weekdays.map((weekday) => {
             return (
-              <Box color="#d6d6d6" key={weekday}>
+              <Box
+                color="#d6d6d6"
+                key={weekday}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
                 {weekday}
               </Box>
             );
           })}
           {_.times(firstDateOffset, (num) => {
-            return <Box color="#707070" key={`offset-${num}`}></Box>;
+            return (
+              <Box
+                color="#707070"
+                key={`offset-${num}`}
+                boxShadow="0 0 0 1px #ededed"
+              ></Box>
+            );
           })}
           {dates.map((date) => {
             return (
@@ -169,15 +193,19 @@ const Calendar: FC<Props> = (props) => {
                     ? "white"
                     : "#707070"
                 }
+                _hover={{
+                  bg:
+                    date.toDateString() === props.selectedDate.toDateString()
+                      ? "#995ee0"
+                      : "#f5f5f5",
+                }}
                 display="flex"
                 alignItems="flex-end"
                 justifyContent="flex-end"
-                borderLeft="1px"
-                borderLeftColor="#d6d6d6"
-                borderTop="1px"
-                borderTopColor="#d6d6d6"
-                borderEnd="1px"
-                borderInlineEnd="none"
+                padding="4px"
+                cursor="pointer"
+                fontSize="larger"
+                boxShadow="0 0 0 1px #ededed"
               >
                 {date.getDate()}.
               </Box>
