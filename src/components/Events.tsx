@@ -1,4 +1,4 @@
-import { Box, IconButton, Input } from "@chakra-ui/react";
+import { Box, Heading, IconButton, Input, Text } from "@chakra-ui/react";
 import { FC, useState } from "react";
 import { primaryPurple, secondaryPurple } from "../App";
 
@@ -21,9 +21,15 @@ const Events: FC<Props> = (props) => {
       flexDirection="column"
       gap={4}
     >
-      <h3>{`${props.selectedDate.toLocaleString("default", {
-        month: "long",
-      })} ${props.selectedDate.getDate()}`}</h3>
+      <Box>
+        <Heading
+          size="lg"
+          color="#707070"
+          fontWeight="light"
+        >{`${props.selectedDate.toLocaleString("default", {
+          month: "long",
+        })} ${props.selectedDate.getDate()}`}</Heading>
+      </Box>
       <Box
         h={rowHeight}
         p="16px"
@@ -78,7 +84,9 @@ const Events: FC<Props> = (props) => {
                 alignItems="center"
                 key={`${index}-${event}`}
               >
-                {event}
+                <Text color="#707070" fontSize="2xl" fontWeight="light">
+                  {event}
+                </Text>
               </Box>
             );
           })

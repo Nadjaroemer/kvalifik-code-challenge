@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Box, Grid, Button, IconButton } from "@chakra-ui/react";
+import { Box, Grid, Button, IconButton, Heading } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { startOfMonth } from "date-fns";
 import { primaryPurple, secondaryPurple } from "../App";
@@ -65,9 +65,16 @@ const Calendar: FC<Props> = (props) => {
         alignItems="center"
         marginTop="12px"
       >
-        <Box marginLeft="24px">{`${firstDateInMonth.toLocaleString("default", {
-          month: "long",
-        })} ${firstDateInMonth.getFullYear()}`}</Box>
+        <Box marginLeft="24px" display="flex" gap="4px">
+          <Heading size="md" color="#707070" fontWeight="bold">
+            {`${firstDateInMonth.toLocaleString("default", {
+              month: "long",
+            })}`}
+          </Heading>
+          <Heading size="md" color="#707070" fontWeight="light">
+            {`${firstDateInMonth.getFullYear()}`}
+          </Heading>
+        </Box>
         <Box
           display="flex"
           alignItems="center"

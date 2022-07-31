@@ -11,7 +11,7 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
-    <Box h="100vh" bg="#F4F4F4" w="100%" p="10">
+    <Box h="100%" bg="#F4F4F4" w="100%" p="10">
       <Center>
         <Box>
           <Calendar
