@@ -1,8 +1,8 @@
 import _ from "lodash";
-import { Box, Grid, Button } from "@chakra-ui/react";
+import { Box, Grid, Button, IconButton } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { startOfMonth } from "date-fns";
-import { primaryPurple } from "../App";
+import { primaryPurple, secondaryPurple } from "../App";
 
 export const getAllDaysInMonth = (year: number, month: number) => {
   const date = new Date(year, month, 1);
@@ -74,11 +74,12 @@ const Calendar: FC<Props> = (props) => {
           justifyContent="center"
           marginRight="24px"
         >
-          <Button
+          <IconButton
             size="xs"
             borderRadius="50%"
             backgroundColor={primaryPurple}
-            _hover={{ bg: "#000" }}
+            _hover={{ bg: secondaryPurple }}
+            aria-label="Go to previous month"
             onClick={() => {
               setFirstDateInMonth(
                 new Date(
@@ -88,22 +89,24 @@ const Calendar: FC<Props> = (props) => {
                 )
               );
             }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-24 w-24"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="white"
-              strokeWidth={4}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </Button>
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                height="12px"
+                width="12px"
+                viewBox="0 0 24 24"
+                stroke="white"
+                strokeWidth={4}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            }
+          />
           <Button
             variant="ghost"
             onClick={() => {
@@ -115,10 +118,12 @@ const Calendar: FC<Props> = (props) => {
           >
             Today
           </Button>
-          <Button
+          <IconButton
             size="xs"
             borderRadius="50%"
             backgroundColor={primaryPurple}
+            aria-label="Go to next month"
+            _hover={{ bg: secondaryPurple }}
             onClick={() => {
               setFirstDateInMonth(
                 new Date(
@@ -128,22 +133,24 @@ const Calendar: FC<Props> = (props) => {
                 )
               );
             }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-25 w-25"
-              fill="none"
-              viewBox="0 0 20 20"
-              stroke="white"
-              strokeWidth={4}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </Button>
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="12px"
+                width="12px"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                strokeWidth={4}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            }
+          />
         </Box>
       </Box>
       <Grid
@@ -196,8 +203,8 @@ const Calendar: FC<Props> = (props) => {
                 _hover={{
                   bg:
                     date.toDateString() === props.selectedDate.toDateString()
-                      ? "#995ee0"
-                      : "#f5f5f5",
+                      ? secondaryPurple
+                      : "#d9d7d7",
                 }}
                 display="flex"
                 alignItems="flex-end"

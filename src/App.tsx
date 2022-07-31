@@ -4,6 +4,7 @@ import Calendar from "./components/Calendar";
 import Events from "./components/Events";
 
 export const primaryPurple = "#A170DB";
+export const secondaryPurple = "#995ee0";
 
 function App() {
   const [events, setEvents] = useState<Record<string, string[]>>({});
