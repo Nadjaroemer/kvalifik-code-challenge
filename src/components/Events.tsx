@@ -50,6 +50,7 @@ const Events: FC<Props> = (props) => {
             props.addEvent(inputValue);
             setInputValue("");
           }}
+          disabled={inputValue === ""}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
